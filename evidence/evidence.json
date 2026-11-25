@@ -1,0 +1,212 @@
+{
+ "census": {
+  "directories": 10088,
+  "ext_census": {
+   "000": 30,
+   "001": 6,
+   "002": 6,
+   "003": 6,
+   "004": 5,
+   "gz": 334,
+   "jpg": 736498,
+   "json": 502,
+   "jsonl": 859,
+   "mp4": 57903,
+   "parquet": 8272,
+   "yaml": 98
+  },
+  "files": 804554,
+  "publisher_parquet_crosscheck": {
+   "match": true,
+   "observed_parquet_files": 8272,
+   "publisher_total_episodes": 8272
+  },
+  "top_categories": {
+   "ImitationLearning": 161,
+   "PhysicalReasoning": 814137,
+   "ReinforcementLearning": 128,
+   "RichInteraction": 101,
+   "assets": 1,
+   "simulation": 105
+  },
+  "total_size_bytes": 17540579984739,
+  "total_tb": 17.54,
+  "unique_paths": 814642
+ },
+ "checks": [
+  {
+   "details": {
+    "crawl_pages": 815,
+    "directories": 10088,
+    "ext_census": {
+     "000": 30,
+     "001": 6,
+     "002": 6,
+     "003": 6,
+     "004": 5,
+     "gz": 334,
+     "jpg": 736498,
+     "json": 502,
+     "jsonl": 859,
+     "mp4": 57903,
+     "parquet": 8272,
+     "yaml": 98
+    },
+    "files": 804554,
+    "top_categories": {
+     "ImitationLearning": 161,
+     "PhysicalReasoning": 814137,
+     "ReinforcementLearning": 128,
+     "RichInteraction": 101,
+     "assets": 1,
+     "simulation": 105
+    },
+    "total_size_bytes": 17540579984739,
+    "total_tb": 17.54,
+    "unique_paths": 814642
+   },
+   "dim": "completeness/structure",
+   "id": "C1",
+   "status": "pass"
+  },
+  {
+   "details": {
+    "id_range_overlaps": [],
+    "n_overlaps": 0,
+    "nonconforming_hidden_entries": [
+     "PhysicalReasoning/.dataset_build",
+     "PhysicalReasoning/.denseprompt_merge"
+    ],
+    "note": "hidden internal build dirs (.dataset_build, .denseprompt_merge) are published in an open dataset"
+   },
+   "dim": "consistency/naming",
+   "id": "C2",
+   "status": "finding"
+  },
+  {
+   "details": {
+    "dated_dirs": [
+     "PhysicalReasoning/opensourcev4-20261001",
+     "PhysicalReasoning/opensourcev4-20261003"
+    ],
+    "note": "two dated snapshot dirs (opensourcev4-20261001 / -20261003); overlap stated, not interpreted",
+    "task_id_overlap_between_dirs": 11,
+    "task_ids_per_dir": {
+     "PhysicalReasoning/opensourcev4-20261001": 18,
+     "PhysicalReasoning/opensourcev4-20261003": 11
+    }
+   },
+   "dim": "consistency/dual-snapshots",
+   "id": "C2b",
+   "status": "finding"
+  },
+  {
+   "details": {
+    "n_risky": 0,
+    "note": "split_episodes_tool.zip at root is a tool archive, counted under gz/zip census, not executed",
+    "risky_present": []
+   },
+   "dim": "safety/executables",
+   "id": "C4",
+   "status": "pass"
+  }
+ ],
+ "findings_summary": [
+  "category skew: 99.9% of tree entries sit under PhysicalReasoning; the other five declared categories are thin shells (observed counts in census.top_categories) — a structural-diversity fact a reader of the card would not guess",
+  "publisher internal build receipt (verification.json) cross-check: completedEpisodes+preservedEpisodes = 8146+126 = 8272 == our independently observed parquet file count (8272) — exact match",
+  "hidden internal build directories published inside an open dataset (.dataset_build incl. _datahub_export/verification.json, .denseprompt_merge)",
+  "dual dated snapshot dirs opensourcev4-20261001 / opensourcev4-20261003 with task-id overlap stated in C2b",
+  "Hf siblings API silently truncates at 100,000 entries; the true tree is ~814,642 paths — metadata consumers beware"
+ ],
+ "format": "correctover-dataset-evidence/1.0",
+ "generated_utc": "2026-11-25T07:40:11+00:00",
+ "held": [
+  {
+   "dim": "trajectory content quality (per-episode success/coverage)",
+   "reason": "requires downloading and judging 17+ TB of recordings — outside this evidence pass; HELD, not scored"
+  },
+  {
+   "dim": "perceptual diversity (visual variety across scenes)",
+   "reason": "human/model judgement over imagery — HELD"
+  },
+  {
+   "dim": "usability beyond documented structure (actual training throughput)",
+   "reason": "requires training runs — HELD"
+  }
+ ],
+ "method": {
+  "crawl": "server-side recursive tree crawl of https://hf-mirror.com, Link-header cursor pagination, 1000/page",
+  "dedup": "by unique path across overlapping crawl runs",
+  "official_endpoint": "https://huggingface.co unreachable from our egress (TCP timeout x1, disclosed); mirror used and every fetched artifact pinned by sha256"
+ },
+ "object": {
+  "crawl_provenance": {
+   "dump_entries": 958542,
+   "dump_pages": 815,
+   "mode": "from-dump"
+  },
+  "downloads_declared": 2000168,
+  "github_readme": {
+   "blob_sha": "3f9c719de0dc143268e629883d660cbc29918aa5",
+   "bytes": 19254,
+   "note": "README declares Beta/Alpha (gated siblings) stats; no AgiBotWorld2026-specific stats declared — cross-check therefore anchored on publisher_receipt only",
+   "repo": "OpenDriveLab/AgiBot-World",
+   "sha256": "4ee72fc2161e3c66d93638f99ece0479c90bda996abe54f7070e4e08208b1acc"
+  },
+  "lastModified": "2026-10-24T13:41:37.000Z",
+  "license": "cc-by-nc-sa-4.0",
+  "mirror": "https://hf-mirror.com",
+  "publisher_receipt": {
+   "bytes": 227,
+   "claims": {
+    "completedEpisodes": 8146,
+    "ok": true,
+    "opaqueFieldsPreserved": true,
+    "outputInfoBytes": 792269339,
+    "preservedEpisodes": 126,
+    "products": 98,
+    "supplementalElements": 31,
+    "verifiedInSegmentElements": 1434686
+   },
+   "crosscheck": {
+    "completedEpisodes+preservedEpisodes": 8272
+   },
+   "path": "PhysicalReasoning/.dataset_build/snapshot/_datahub_export/verification.json",
+   "sha256": "f9c0a69aa053daeda37510e155bb3b064999f85ed95d22e7f60a4909ecd0c99d"
+  },
+  "repo": "agibot-world/AgiBotWorld2026",
+  "revision_sha": "95b159a10305a0385f369aba5d4b16242526d17b"
+ },
+ "publisher_receipt": {
+  "bytes": 227,
+  "claims": {
+   "completedEpisodes": 8146,
+   "ok": true,
+   "opaqueFieldsPreserved": true,
+   "outputInfoBytes": 792269339,
+   "preservedEpisodes": 126,
+   "products": 98,
+   "supplementalElements": 31,
+   "verifiedInSegmentElements": 1434686
+  },
+  "crosscheck": {
+   "completedEpisodes+preservedEpisodes": 8272
+  },
+  "path": "PhysicalReasoning/.dataset_build/snapshot/_datahub_export/verification.json",
+  "sha256": "f9c0a69aa053daeda37510e155bb3b064999f85ed95d22e7f60a4909ecd0c99d"
+ },
+ "samples": [
+  {
+   "bytes": 227,
+   "path": "PhysicalReasoning/.dataset_build/snapshot/_datahub_export/verification.json",
+   "sha256": "f9c0a69aa053daeda37510e155bb3b064999f85ed95d22e7f60a4909ecd0c99d",
+   "stored_as": "samples/verification.json"
+  },
+  {
+   "bytes": 234,
+   "path": "PhysicalReasoning/opensourcev4-20261001/sharegpt/task_100448/01/cotrain_data_genie_sim_probe_affordance_bbox_point.yaml",
+   "sha256": "7a0e244e5455ead419906c1e4bd10ba559f347566bde7c6747728ee9276b6661",
+   "stored_as": "samples/affordance-task100448.yaml"
+  }
+ ]
+}

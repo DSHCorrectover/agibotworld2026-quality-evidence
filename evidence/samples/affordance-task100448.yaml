@@ -1,0 +1,10 @@
+datasets:
+  - json_path: bbox.json
+    data_root: images
+    sampling_strategy: all
+  - json_path: point.json
+    data_root: images
+    sampling_strategy: all
+  - json_path: trace.json
+    data_root: images
+    sampling_strategy: all

@@ -1,0 +1,31 @@
+name: evidence-lock
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install cryptography
+      - name: Verify shipped receipt signature
+        run: python3 verify.py
+      - name: Fresh full re-crawl and cross-check
+        run: python3 check.py
+      - name: Data lock — census must match the signed receipt
+        run: |
+          python3 - <<'EOF'
+          import json
+          a=json.load(open("evidence/evidence.json"))
+          f=a["census"]["files"]; d=a["census"]["directories"]; t=a["census"]["total_tb"]
+          p=a["census"]["publisher_parquet_crosscheck"]
+          assert f==804554 and d==10088, f"census drift: files={f} dirs={d}"
+          assert abs(t-17.54)<0.5, f"size drift: {t} TB"
+          assert p["match"] is True, "publisher crosscheck failed"
+          print(f"LOCK OK: files={f} dirs={d} TB={t} crosscheck=True")
+          EOF
